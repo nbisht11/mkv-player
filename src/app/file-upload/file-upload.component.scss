@@ -1,0 +1,10 @@
+.dropzone-element{
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    .dz-message {
+        color: #999;
+        font-size: 16px;
+    }
+}

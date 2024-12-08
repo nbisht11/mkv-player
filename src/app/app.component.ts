@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { PlayerComponent } from './player/player.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 @Component({
   selector: 'app-root',
-  imports: [PlayerComponent],
+  imports: [PlayerComponent, FileUploadComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
