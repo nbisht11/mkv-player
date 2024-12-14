@@ -1,8 +1,21 @@
-<app-file-upload>
+<app-file-upload (outputData)="getDataFromFile($event)">
     
 </app-file-upload>
 
-@if(false) {
-    <app-player [options]="playerOptions">
+@if(showPlayer) {
+    <app-player [data]="playerData">
     </app-player>
 }
+
+<!-- <div>
+    Future Layout
+</div> -->
+
+<!-- <app-header>
+
+</app-header>
+    <routerLink>
+
+    </routerLink>
+<app-footer>
+</app-footer> -->
