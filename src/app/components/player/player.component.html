@@ -1,0 +1,17 @@
+@if(!showPlayer) {
+    <div class="dropzone-element" #dropzoneWrapper>
+        <div class="dz-message" data-dz-message>
+            <i a="upload-icon" aria-hidden="true"></i>
+        </div>
+    </div>
+} @else {
+    <video class="video-js" #videoJsWrapper></video>   
+}
+@if(showLoadingSpinner){
+    <div class="loader-overlay">
+        <div class="loading-spinner"></div>
+        <p class="loader-message">
+            {{loadingSpinnerMessage}}
+        </p>
+    </div>
+}
