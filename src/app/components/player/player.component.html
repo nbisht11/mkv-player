@@ -1,13 +1,21 @@
 @if(!showPlayer) {
-    <div class="dropzone-element" #dropzoneWrapper>
-        <div class="dz-message" data-dz-message>
-            <i a="upload-icon" aria-hidden="true"></i>
+    <div class="dropzone-container">
+        <div class="dropzone-element" #dropzoneWrapper>
+            <img class="upload-icon" src="icons/upload-icon.png">
+            <p class="dz-message">Drop your video here, or click to upload it for playback.</p>
         </div>
     </div>
 } @else {
-    <video class="video-js" #videoJsWrapper></video>   
+    <div class="video-js-container">
+        <div class="video-js-item">
+            <video class="video-js" #videoJsWrapper></video>
+        </div>
+        <div class="file-name">
+            {{uploadedFile.name}}
+        </div>
+    </div>
 }
-@if(showLoadingSpinner){
+@if(loadingSpinnerFlag){
     <div class="loader-overlay">
         <div class="loading-spinner"></div>
         <p class="loader-message">

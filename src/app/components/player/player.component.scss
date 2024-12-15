@@ -1,12 +1,48 @@
-.dropzone-element {
-    border: 2px dashed #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    text-align: center;
+.dropzone-container {
+    margin-top: 80px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    .dz-message {
-        color: #999;
-        font-size: 16px;
+    .dropzone-element {
+        width: 600px;
+        height: 100%;
+        border: 2px dashed #1b1919;
+        border-radius: 5px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .upload-icon{
+            width: 80px;
+            height: 80px;
+        }
+
+        .dz-message {
+            color: #1b1919;
+            font-size: 16px;
+        }
+    }
+}
+
+.video-js-container {
+    height: 600px;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    margin-top: 20px;
+    .video-js-item{
+        width: 900px;
+        margin-left: 40px;
+    }
+
+    .file-name{
+        margin-top: 20px;
+        margin-left: 40px;
+        font-size: 20px;
     }
 }
 

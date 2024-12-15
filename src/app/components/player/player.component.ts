@@ -30,7 +30,7 @@ export class PlayerComponent implements AfterViewInit {
   player!: Player | any;
   currentTime!: number;
   audioTracksAdded = false;
-  showLoadingSpinner = false;
+  loadingSpinnerFlag = false;
   loadingSpinnerMessage = "Hello World";
 
   ngAfterViewInit(): void {
@@ -41,12 +41,15 @@ export class PlayerComponent implements AfterViewInit {
     this.dzone = new Dropzone(this.dropzoneWrapper.nativeElement, {
       url: 'null',
       autoProcessQueue: false,
+      maxFiles: 1,
       maxFilesize: 2600,
       acceptedFiles: '.mp4, .mkv, .mov, .3gp'
     });
 
     this.dzone.on('addedfile', (file) => {
+      file.previewElement.innerHTML = "";
       this.uploadedFile = file;
+      this.showLoadingSpinner(`Loading file: ${file.name}`);
       this.streamInfoService.getStreamInfo(file).then((parsed: any) => {
         this.processStreamInfo(parsed);
       })
@@ -70,6 +73,7 @@ export class PlayerComponent implements AfterViewInit {
   }
 
   getVideoAndInitalisePlayer(audioStreamIndex?: number) {
+    this.showLoadingSpinner(audioStreamIndex != undefined ? 'Processing change' : 'Processing streams');
     const argv = [
       '-i', '/data/' + this.uploadedFile.name,
       '-codec', 'copy',
@@ -99,7 +103,6 @@ export class PlayerComponent implements AfterViewInit {
       fluid: true,
       aspectRatio: "16:9",
       autoplay: true,
-      muted: true,
       controls: true,
       playbackRates: [0.5, 1, 1.5, 2]
     };
@@ -107,7 +110,8 @@ export class PlayerComponent implements AfterViewInit {
       this.videoJsWrapper.nativeElement,
       videoJsOptions,
       function onPlayerReady() {
-        console.log('onPlayerReady');
+        this.volume(0.5);
+        this.trigger('volumechange');
       }
     );
     const video = new Blob([data.data.buffer]);
@@ -116,6 +120,7 @@ export class PlayerComponent implements AfterViewInit {
       type: "video/mp4"
     });
     this.addAudioTracks();
+    this.hideLoadingSpinner();
     this.player.load();
     if (this.currentTime) {
       this.player.currentTime(this.currentTime);
@@ -136,7 +141,7 @@ export class PlayerComponent implements AfterViewInit {
       }
       this.audioTracksAdded = true;
       let audioTrackList = this.player.audioTracks();
-      audioTrackList.addEventListener('change', this.onAudioTrackChange.bind(this))
+      audioTrackList.addEventListener('change', this.onAudioTrackChange.bind(this));
     }
   }
 
@@ -150,6 +155,16 @@ export class PlayerComponent implements AfterViewInit {
         this.getVideoAndInitalisePlayer(i);
       }
     }
+  }
+
+  showLoadingSpinner(message: string) {
+    this.loadingSpinnerMessage = message;
+    this.loadingSpinnerFlag = true;
+  }
+
+  hideLoadingSpinner() {
+    this.loadingSpinnerFlag = false;
+    this.loadingSpinnerMessage = '';
   }
 
 }
