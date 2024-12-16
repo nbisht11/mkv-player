@@ -1,17 +1,18 @@
-import { Inject, Injectable } from '@angular/core';
-import {DOCUMENT} from '@angular/common';
+import { Injectable } from '@angular/core';
+import {Location} from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StreamExtractionService {
 
-  constructor(@Inject(DOCUMENT) private document: Document) { }
+  constructor(private location: Location) { }
 
   getExtractedStreamForVideoPlayback (file:any, argv:any) {
     file = structuredClone(file);
     return new Promise((resolve, reject) => {
-      let ffmpegWorker = new Worker(`${this.document.location.origin}/js/ffmpeg-worker-mkve.js`);
+      const workerUrl = this.location.prepareExternalUrl('js/ffmpeg-worker-mkve.js');
+      let ffmpegWorker = new Worker(workerUrl);
       let stdout = ''
       let stderr = ''
       ffmpegWorker.onmessage = (message: any) => {

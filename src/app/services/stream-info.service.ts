@@ -1,16 +1,17 @@
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+import { Location } from '@angular/common';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StreamInfoService {
 
-  constructor(@Inject(DOCUMENT) private document: Document) { }
+  constructor(private location: Location) { }
 
   getStreamInfo(file: any) {
     return new Promise((resolve, reject) => {
-      let getStreamDetailsWorker = new Worker(`${this.document.location.origin}/js/ffprobe-worker-mkve.js`);
+      const workerUrl = this.location.prepareExternalUrl('js/ffprobe-worker-mkve.js');
+      let getStreamDetailsWorker = new Worker(workerUrl);
       let stdout = ''
       let stderr = ''
       getStreamDetailsWorker.onmessage = async (message: any) => {
