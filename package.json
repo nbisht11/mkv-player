@@ -1,12 +1,15 @@
 {
-  "name": "media-player",
+  "name": "any-video-player",
   "version": "0.0.0",
+  "homepage": "https://nbisht11.github.io/any-video-player",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist/media-player"
   },
   "private": true,
   "dependencies": {
@@ -30,6 +33,7 @@
     "@angular/cli": "^19.0.3",
     "@angular/compiler-cli": "^19.0.0",
     "@types/jasmine": "~5.1.0",
+    "gh-pages": "^6.2.0",
     "jasmine-core": "~5.4.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
