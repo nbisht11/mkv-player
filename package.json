@@ -1,15 +1,16 @@
 {
-  "name": "any-video-player",
+  "name": "mkv-player",
   "version": "0.0.0",
-  "homepage": "https://nbisht11.github.io/any-video-player",
+  "repository": "https://github.com/nbisht11/mkv-player",
+  "homepage": "https://nbisht11.github.io/mkv-player",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "predeploy": "ng build --base-href \"https://nbisht11.github.io/any-video-player/\" ",
-    "deploy": "gh-pages -d dist/media-player"
+    "predeploy": "ng build --base-href \"https://nbisht11.github.io/mkv-player/\" ",
+    "deploy": "gh-pages -d dist/mkv-player"
   },
   "private": true,
   "dependencies": {
